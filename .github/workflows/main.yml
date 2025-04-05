@@ -24,7 +24,7 @@ jobs:
         sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
     - name: Run tailscale up
-      run: sudo tailscale up --authkey=${{ ts_authkey }}
+      run: sudo tailscale up --authkey=${{ secrets.ts_authkey }}
 
     - name: Run tailscale up with advertise-exit-node
       run: sudo tailscale up --authkey=${{ ts_authkey }} --advertise-exit-node
