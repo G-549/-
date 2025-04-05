@@ -24,8 +24,10 @@ jobs:
         sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
     - name: Run tailscale up
-      run: sudo tailscale up --authkey=${{ secrets.ts_authkey }}
-      
+      run: sudo tailscale up --authkey=${{ ts_authkey }}
+
+    - name: Run tailscale up with advertise-exit-node
+      run: sudo tailscale up --authkey=${{ ts_authkey }} --advertise-exit-node
 
     - name: Ensure workflow runs for 45 minutes
       run: sleep $((45*60))  # 睡眠45分钟，确保工作流运行到45分钟
