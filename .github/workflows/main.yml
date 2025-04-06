@@ -15,10 +15,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: 设置环境变量
-      run: |
-        echo "export TSAUTHKEY=${{ secrets.tsauthkey }}" >> $HOME/.bashrc
-        source $HOME/.bashrc
+    
+        
 
     - name: 预设置Tailscale
       run: |
@@ -35,6 +33,8 @@ jobs:
 
     - name: 声明出口节点
       run: |
+        echo "export TSAUTHKEY=${{ secrets.tsauthkey }}" >> $HOME/.bashrc
+        source $HOME/.bashrc
         # 使用 advertise-exit-node 选项启动 Tailscale
         sudo tailscale up --advertise-exit-node
 
