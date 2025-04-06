@@ -27,11 +27,12 @@ jobs:
         sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
     - name: 登入Tailscale
-      
+      env:
+        TOKEN: ${{ secrets.ts_authkey }} 
       run: |
         
         # 启动 Tailscale
-        sudo tailscale up --auth-key=＄{{ secrets.ts_authkey }}
+        sudo tailscale up --auth-key=＄TS_AUTHKEY
 
     - name: 声明出口节点
       run: |
