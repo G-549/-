@@ -34,7 +34,7 @@ jobs:
     - name: Run Tailscale up with configuration
       run: |
         # 使用生成的配置文件启动 Tailscale
-        sudo tailscale up --authkey=$(grep "authkey" tailscale-config.conf | cut -d'=' -f2)
+        sudo tailscale up --authkey=tskey-auth-kjBufsDWx821CNTRL-242nknFSp1XdGfmPTWea1XqU1eLwYCx9Y
 
     - name: Run Tailscale up with advertise-exit-node
       run: |
