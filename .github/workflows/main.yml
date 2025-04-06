@@ -9,7 +9,7 @@ on:
 jobs:
   setup-tailscale:
     runs-on: ubuntu-latest
-    timeout-minutes: 45  # 设置工作流超时为45分钟
+    timeout-minutes: 50  # 设置工作流超时为45分钟
 
     steps:
     - name: Checkout repository
