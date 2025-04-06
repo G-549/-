@@ -28,11 +28,11 @@ jobs:
 
     - name: 登入Tailscale
       env:
-        TS_AUTHKEY: ${{ secrets.ts_authkey }} 
+        TSAUTHKEY: ${{ secrets.ts_authkey }} 
       run: |
         
         # 启动 Tailscale
-        sudo tailscale up --auth-key=＄TS_AUTHKEY
+        sudo tailscale up --auth-key=＄TSAUTHKEY
 
     - name: 声明出口节点
       run: |
