@@ -27,7 +27,7 @@ jobs:
         sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
     - name: 登入Tailscale
       env:
-        TSAUTHKEY: ${{ secrets.tsauthkey }}
+        TSAUTHKEY: ${{ secrets.ts_authkey }}
       run: |
         
         # 启动 Tailscale
