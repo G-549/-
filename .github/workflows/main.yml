@@ -28,7 +28,7 @@ jobs:
 
     - name: 登入Tailscale
       env:
-        TSAUTHKEY: ${{ secret.tsauthkey }}
+        TSAUTHKEY: ${{ secrets.tsauthkey }}
       run: |
         
         # 启动 Tailscale
