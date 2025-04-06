@@ -27,9 +27,10 @@ jobs:
         sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
     - name: 登入Tailscale
+      env:
+        TSAUTHKEY: ${{ secret.tsauthkey }}
       run: |
-        echo "export TSAUTHKEY=${{ secrets.tsauthkey }}" >> $HOME/.bashrc
-        source $HOME/.bashrc
+        
         # 启动 Tailscale
         sudo tailscale up --auth-key=$TSAUTHKEY
 
