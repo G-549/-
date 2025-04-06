@@ -15,15 +15,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Generate Tailscale configuration file
-      env:
-        TS_AUTHKEY: ${{ secrets.ts_authkey }} # 引用 GitHub Secrets 中的 ts_authkey
-      run: |
-        # 使用 sed 命令将模板中的 {{TS_AUTHKEY}} 占位符替换为 ts_authkey 的值
-        echo "authkey={{TS_AUTHKEY}}" > tailscale-template.conf
-        sed "s/{{TS_AUTHKEY}}/$TS_AUTHKEY/g" tailscale-template.conf > tailscale-config.conf
+    
 
-    - name: Run Tailscale setup
+    - name: 预设置Tailscale
       run: |
         sudo -s  # 切换到 root 用户
         curl -fsSL https://tailscale.com/install.sh | sh
@@ -31,15 +25,15 @@ jobs:
         echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
         sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
-    - name: Run Tailscale up with configuration
+    - name: 登入Tailscale
       run: |
-        # 使用生成的配置文件启动 Tailscale
-        sudo tailscale up --authkey=tskey-auth-kjBufsDWx821CNTRL-242nknFSp1XdGfmPTWea1XqU1eLwYCx9Y
+        # 启动 Tailscale
+        sudo tailscale up --auth-key=＄{{ secret.ts_authkey }}
 
-    - name: Run Tailscale up with advertise-exit-node
+    - name: 声明出口节点
       run: |
         # 使用 advertise-exit-node 选项启动 Tailscale
-        sudo tailscale up --advertise-exit-node --authkey=$(grep "authkey" tailscale-config.conf | cut -d'=' -f2)
+        sudo tailscale up --advertise-exit-node
 
     - name: Ensure workflow runs for 45 minutes
       run: sleep $((45*60))  # 睡眠45分钟，确保工作流运行到45分钟
