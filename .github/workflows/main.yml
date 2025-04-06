@@ -1,4 +1,4 @@
-name: Tailscale Setup
+name: Internet_Access by Tailscale
 
 on:
   push:
