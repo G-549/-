@@ -29,6 +29,7 @@ jobs:
     - name: 登入Tailscale
       run: |
         # 启动 Tailscale
+        ＄TSAUTHKEY=＄{{ secret.tsauthkey }}
         sudo tailscale up --auth-key=$TSAUTHKEY
 
     - name: 声明出口节点
