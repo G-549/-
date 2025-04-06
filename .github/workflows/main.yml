@@ -28,7 +28,7 @@ jobs:
 
     - name: 登入Tailscale
       env:
-        TOKEN: ${{ secrets.ts_authkey }} 
+        TS_AUTHKEY: ${{ secrets.ts_authkey }} 
       run: |
         
         # 启动 Tailscale
