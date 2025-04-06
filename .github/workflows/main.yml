@@ -1,4 +1,4 @@
-name: Internet_Access by Tailscale
+name: Internet_access by Tailscale
 
 on:
   push:
@@ -25,20 +25,17 @@ jobs:
         echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
         echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
         sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
-
     - name: 登入Tailscale
       env:
-        TSAUTHKEY: ${{ secrets.ts_authkey }}
+        TSAUTHKEY: ${{ secrets.tsauthkey }}
       run: |
         
         # 启动 Tailscale
-        sudo tailscale up --auth-key=＄TSAUTHKEY
-
+        sudo tailscale up --auth-key=$TSAUTHKEY
     - name: 声明出口节点
       run: |
         
         # 使用 advertise-exit-node 选项启动 Tailscale
         sudo tailscale up --advertise-exit-node
-
     - name: Ensure workflow runs for 45 minutes
       run: sleep $((45*60))  # 睡眠45分钟，确保工作流运行到45分钟
